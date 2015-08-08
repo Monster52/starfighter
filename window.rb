@@ -10,12 +10,12 @@ end
 
 class GameWindow < Gosu::Window
   def initialize
-    super 640, 480
+    super 840, 680
     self.caption = "Ross' Starfighter" 
     @background_image = Gosu::Image.new("media/space_bg.png", :tileable => true)
 
     @player = Player.new
-    @player.warp(320, 240)
+    @player.warp(420, 340)
 
     @star_anim = Gosu::Image::load_tiles("media/goldCoin1.png", 25, 25)
     @stars = Array.new
@@ -33,10 +33,14 @@ class GameWindow < Gosu::Window
     if Gosu::button_down? Gosu::KbUp or Gosu::button_down? Gosu::GpButton0 then
       @player.accelerate
     end
+    if Gosu::button_down? Gosu::KbDown then
+      @player.deccelerate
+    end
+    
     @player.move
     @player.collect_stars(@stars)
 
-    if rand(100) < 4 and @stars.size < 25 then
+    if rand(100) < 4 and @stars.size < 35 then
       @stars.push(Star.new(@star_anim))
     end
   end
@@ -58,4 +62,3 @@ end
 window = GameWindow.new
 window.show
 
-# Little Robot Sound Factory

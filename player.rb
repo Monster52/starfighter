@@ -23,11 +23,16 @@ class Player
     @vel_y += Gosu::offset_y(@angle, 0.5)
   end
 
+  def deccelerate
+    @vel_x += Gosu::offset_x(@angle, -0.5)
+    @vel_y += Gosu::offset_y(@angle, -0.5)
+  end
+
   def move
     @x += @vel_x
     @y += @vel_y
-    @x %= 640
-    @y %= 480
+    @x %= 840
+    @y %= 680
 
     @vel_x *= 0.95
     @vel_y *= 0.95

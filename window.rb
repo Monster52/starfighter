@@ -10,7 +10,7 @@ end
 class GameWindow < Gosu::Window
   def initialize
     super 840, 680
-    self.caption = "Ross' Starfighter" 
+    self.caption = "Starchaser" 
     @background_image = Gosu::Image.new("media/space_bg.png", :tileable => true)
 
     @player = Player.new
@@ -23,6 +23,7 @@ class GameWindow < Gosu::Window
     @stars = Array.new
 
     @font = Gosu::Font.new(20)
+    @time = 0
   end
 
   def update
@@ -42,6 +43,7 @@ class GameWindow < Gosu::Window
     @player.move
     @player.collect_stars(@stars)
     @player.meteor_collide(@meteors)
+    @time += 1
 
     if rand(100) < 4 and @meteors.size < 3 then
       @meteors.push(Meteor.new(@meteor_anim))
@@ -67,6 +69,7 @@ class GameWindow < Gosu::Window
     @stars.each { |star| star.draw }
     @font.draw( "Score: #{@player.score}", 10, 10, ZOrder::UI, 1.0, 1.0, 0xff_ffff00 )
     @font.draw( "Lives: #{@player.life}", 300, 10, ZOrder::UI, 1.0, 1.0, 0xff_ffff00 )
+    @font.draw( "Time: #{@time}", 150, 10, ZOrder::UI, 1.0, 1.0, 0xff_ffff00 )
   end
 
   def button_down(id)

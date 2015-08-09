@@ -1,4 +1,3 @@
-require 'gosu'
 require_relative 'player'
 require_relative 'star'
 require_relative 'meteor'
@@ -7,10 +6,8 @@ module ZOrder
   Background, Stars, Meteors, Player, UI = *0..4
 end
 
-class GameWindow < Gosu::Window
+class PlayState < GameState 
   def initialize
-    super 840, 680
-    self.caption = "Starchaser" 
     @background_image = Gosu::Image.new("media/space_bg.png", :tileable => true)
 
     @player = Player.new
@@ -74,11 +71,9 @@ class GameWindow < Gosu::Window
 
   def button_down(id)
     if id == Gosu::KbEscape
-      close
+      GameState.switch(MenuState.instance)
     end
   end
 end
 
-window = GameWindow.new
-window.show
 

@@ -4,7 +4,7 @@ require_relative 'star'
 require_relative 'meteor'
 
 module ZOrder
-  Background, Stars, Meteor, Player, UI = *0..4
+  Background, Stars, Meteors, Player, UI = *0..4
 end
 
 class GameWindow < Gosu::Window
@@ -16,14 +16,12 @@ class GameWindow < Gosu::Window
     @player = Player.new
     @player.warp(420, 340)
 
-    @meteor = Meteor.new
-    @meteor.warp(100, 100)
-    @meteor.warp(400, 250)
+    @meteor_anim = Gosu::Image::load_tiles("media/meteor.png", 25, 25)
+    @meteors = Array.new
 
     @star_anim = Gosu::Image::load_tiles("media/goldCoin1.png", 25, 25)
     @stars = Array.new
 
-    
     @font = Gosu::Font.new(20)
   end
 
@@ -44,6 +42,10 @@ class GameWindow < Gosu::Window
     @player.move
     @player.collect_stars(@stars)
 
+    if rand(100) < 4 and @meteors.size < 3 then
+      @meteors.push(Meteor.new(@meteor_anim))
+    end
+
     if rand(100) < 4 and @stars.size < 35 then
       @stars.push(Star.new(@star_anim))
     end
@@ -56,7 +58,7 @@ class GameWindow < Gosu::Window
   def draw
     @background_image.draw(0, 0, ZOrder::Background)
     @player.draw
-    @meteor.draw
+    @meteors.each { |meteor| meteor.draw }
     @stars.each { |star| star.draw }
     @font.draw( "Score: #{@player.score}", 10, 10, ZOrder::UI, 1.0, 1.0, 0xff_ffff00 )
   end

@@ -2,8 +2,10 @@ class Player
   def initialize
     @image = Gosu::Image.new("media/ship_1.png")
     @beep = Gosu::Sample.new("media/UI_Synth_00.wav")
+    @meteor_hit = Gosu::Sample.new("media/Laser_08.wav")
     @x = @y = @vel_x = @vel_y = @angle = 0.0
     @score = 0
+    @life = 3
   end
 
   def warp(x, y)
@@ -42,6 +44,10 @@ class Player
     @image.draw_rot(@x, @y, 1, @angle)
   end
 
+  def life
+    @life
+  end
+
   def score
     @score
   end
@@ -51,6 +57,18 @@ class Player
       if Gosu::distance(@x, @y, star.x, star.y) < 35 then
         @score += 10
         @beep.play
+        true
+      else
+        false
+      end
+    end
+  end
+
+  def meteor_collide(meteors)
+    meteors.reject! do |meteor|
+      if Gosu::distance(@x, @y, meteor.x, meteor.y) < 35 then
+        @life -= 1
+        @meteor_hit.play
         true
       else
         false

@@ -7,9 +7,14 @@ class CompleteState < GameState
 
   def initialize
     @message = Gosu::Image.from_text(
-      $window, "You Completed the mission with a time of #{$time}",
+      $window, "You Completed the Mission",
+      Gosu.default_font_name, 80)
+    @final_time = Gosu::Image.from_text(
+      $window, "Your final time was #{$time}",
+      Gosu.default_font_name, 50)
+    @info = Gosu::Image.from_text(
+      $window, "Q = Quit, N = New Game",
       Gosu.default_font_name, 30)
-    
   end
 
   def enter
@@ -27,21 +32,19 @@ class CompleteState < GameState
        
   end
 
-  #def update
-  #  @info = Gosu::Image.from_text(
-  #    $window, "Q = Quit, N = New Game",
-  #    Gosu.default_font_name, 30)
-  #end
-
   def draw
     @message.draw(
       $window.width / 2 - @message.width / 2,
       $window.height / 2 - @message.height / 2,
       10)
-  #  @info.draw(
-  #   $window.width / 2 - @info.width / 2,
-  #    $window.height / 2 - @info.height / 2 + 200,
-  #    10)
+    @final_time.draw(
+      $window.width / 2 - @final_time.width / 2,
+      $window.height / 2 - @final_time.height / 2 + 100,
+      10)
+    @info.draw(
+      $window.width / 2 - @info.width / 2,
+      $window.height / 2 - @info.height / 2 + 200,
+      10)
   end
 
   def button_down(id)

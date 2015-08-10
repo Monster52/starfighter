@@ -42,7 +42,7 @@ class PlayState < GameState
     @player.meteor_collide(@meteors)
     @time += 1
 
-    if rand(100) < 4 and @meteors.size < 3 then
+    if rand(100) < 4 and @meteors.size < 5 then
       @meteors.push(Meteor.new(@meteor_anim))
     end
 
@@ -51,11 +51,11 @@ class PlayState < GameState
     end
 
     if @player.score == 1000
-      exit 
+      GameState.switch(CompleteState.instance)
     end
 
     if @player.life == 0
-      exit
+      GameState.switch(OutOfLivesState.instance)
     end
   end
 

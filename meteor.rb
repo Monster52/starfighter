@@ -1,19 +1,15 @@
 class Meteor
   attr_reader :x, :y
 
-  def initialize(animation)
-    @animation = animation
-    @color = Gosu::Color.new(0xff_000000)
-    @color.green = rand(256 - 40) + 40
-    @color.red = rand(256 - 40) + 40
-    @color.blue = rand(256 - 40) + 40
+  def initialize
+    @image = Gosu::Image.new('media/meteor.png')
+    @color = Gosu::Color.new(0xff_B8B8B8)
     @x = rand * 740
     @y = rand * 680
   end
 
   def draw 
-    img = @animation[Gosu::milliseconds / 100 % @animation.size];
-    img.draw(@x - img.width / 2.0, @y - img.height / 2.0,
-             ZOrder::Stars, 1, 1, @color, :add)
+    @image.draw(@x - @image.width / 2.0, @y - @image.height / 2.0,
+             ZOrder::Meteors, 1, 1, @color, :add)
   end
 end

@@ -13,10 +13,10 @@ class PlayState < GameState
     @player = Player.new
     @player.warp(420, 340)
 
-    @meteor_anim = Gosu::Image::load_tiles("media/meteor.png", 25, 25)
+    @meteor = Meteor.new 
     @meteors = Array.new
 
-    @star_anim = Gosu::Image::load_tiles("media/goldCoin1.png", 25, 25)
+    @star = Star.new
     @stars = Array.new
 
     @font = Gosu::Font.new(20)
@@ -43,11 +43,11 @@ class PlayState < GameState
     @time += 1
 
     if rand(100) < 4 and @meteors.size < 5 then
-      @meteors.push(Meteor.new(@meteor_anim))
+      @meteors.push(Meteor.new)
     end
 
     if rand(100) < 4 and @stars.size < 35 then
-      @stars.push(Star.new(@star_anim))
+      @stars.push(Star.new)
     end
 
     if @player.score == 1000

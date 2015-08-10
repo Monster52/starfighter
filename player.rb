@@ -68,6 +68,7 @@ class Player
     meteors.reject! do |meteor|
       if Gosu::distance(@x, @y, meteor.x, meteor.y) < 35 then
         @life -= 1
+        @score -= 50
         @meteor_hit.play
         true
       else

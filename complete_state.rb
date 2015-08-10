@@ -1,12 +1,14 @@
 require 'singleton'
+require_relative 'play_state'
+
 class CompleteState < GameState
   include Singleton
   attr_accessor :play_state
 
   def initialize
     @message = Gosu::Image.from_text(
-      $window, "You have completed the mission",
-      Gosu.default_font_name, 70)
+      $window, "You Completed the mission with a time of #{$time}",
+      Gosu.default_font_name, 30)
     
   end
 

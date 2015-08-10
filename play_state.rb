@@ -20,27 +20,27 @@ class PlayState < GameState
     @stars = Array.new
 
     @font = Gosu::Font.new(20)
-    @time = 0
+    $time = 0
   end
 
   def update
-    if Gosu::button_down? Gosu::KbLeft or Gosu::button_down? Gosu::GpLeft then
+    if Gosu::button_down? Gosu::KbLeft or Gosu::button_down? Gosu::KbA then
       @player.turn_left
     end
-    if Gosu::button_down? Gosu::KbRight or Gosu::button_down? Gosu::GpRight then
+    if Gosu::button_down? Gosu::KbRight or Gosu::button_down? Gosu::KbD then
       @player.turn_right
     end
-    if Gosu::button_down? Gosu::KbUp or Gosu::button_down? Gosu::GpButton0 then
+    if Gosu::button_down? Gosu::KbUp or Gosu::button_down? Gosu::KbW then
       @player.accelerate
     end
-    if Gosu::button_down? Gosu::KbDown then
+    if Gosu::button_down? Gosu::KbDown or Gosu::button_down? Gosu::KbS then
       @player.deccelerate
     end
     
     @player.move
     @player.collect_stars(@stars)
     @player.meteor_collide(@meteors)
-    @time += 1
+    $time += 1
 
     if rand(100) < 4 and @meteors.size < 5 then
       @meteors.push(Meteor.new)
@@ -66,7 +66,7 @@ class PlayState < GameState
     @stars.each { |star| star.draw }
     @font.draw( "Score: #{@player.score}", 10, 10, ZOrder::UI, 1.0, 1.0, 0xff_ffff00 )
     @font.draw( "Lives: #{@player.life}", 300, 10, ZOrder::UI, 1.0, 1.0, 0xff_ffff00 )
-    @font.draw( "Time: #{@time}", 150, 10, ZOrder::UI, 1.0, 1.0, 0xff_ffff00 )
+    @font.draw( "Time: #{$time}", 150, 10, ZOrder::UI, 1.0, 1.0, 0xff_ffff00 )
   end
 
   def button_down(id)

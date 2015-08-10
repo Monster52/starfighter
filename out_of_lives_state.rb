@@ -10,18 +10,17 @@ class OutOfLivesState < GameState
   end
 
   def enter
-    #music.play(true)
-    #music.volume = 1
+    music.play(true)
+    music.volume = 1
   end
 
   def leave
-    # music.volume = 0
-    # music.stop
+    music.volume = 0
+    music.stop
   end
 
   def music
-    # @@music ||= Gosu::Song.new(
-    #   $window, Game.media_path('menu_music.mp3'))
+    @@music ||= Gosu::Song.new('media/Jingle_Lose_00.wav')
   end
  
 #  def update

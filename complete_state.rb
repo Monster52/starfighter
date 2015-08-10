@@ -7,21 +7,22 @@ class CompleteState < GameState
     @message = Gosu::Image.from_text(
       $window, "You have completed the mission",
       Gosu.default_font_name, 70)
+    
   end
 
   def enter
-    #music.play(true)
-    #music.volume = 1
+    music.play(true)
+    music.volume = 1
   end
 
   def leave
-    # music.volume = 0
-    # music.stop
+     music.volume = 0
+     music.stop
   end
 
   def music
-    # @@music ||= Gosu::Song.new(
-    #   $window, Game.media_path('menu_music.mp3'))
+    @@music ||= Gosu::Song.new("media/Jingle_Win_00.wav")
+       
   end
 
   #def update

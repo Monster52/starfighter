@@ -9,3 +9,10 @@ graphics for this game, but that will come after all the functionality is done.
 
 To run this game just gem install gosu and clone this repo.
 Run ruby window.rb once you cd into the main folder.
+
+Things todo
+- Add main song to Main Screen
+- Add a real backgound/splash screen to Main Screen
+- High score screen
+- Fix songs for both ending Screens
+- Get the messages to show for controls to get back to game or quite on ending screens

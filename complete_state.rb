@@ -15,24 +15,11 @@ class CompleteState < GameState
     @info = Gosu::Image.from_text(
       $window, "Q = Quit, N = New Game",
       Gosu.default_font_name, 30)
-  end
-
-  def enter
-    music.play(true)
-    music.volume = 1
-  end
-
-  def leave
-     music.volume = 0
-     music.stop
-  end
-
-  def music
-    @@music ||= Gosu::Song.new("media/Jingle_Win_00.wav")
-       
+    @music = Gosu::Song.new("media/Jingle_Win_00.wav")
   end
 
   def draw
+    @music.play
     @message.draw(
       $window.width / 2 - @message.width / 2,
       $window.height / 2 - @message.height / 2,

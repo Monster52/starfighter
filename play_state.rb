@@ -20,7 +20,7 @@ class PlayState < GameState
     @stars = Array.new
 
     @font = Gosu::Font.new(20)
-    $time = 0
+    $time = Gosu.milliseconds/1000 
   end
 
   def update
@@ -40,7 +40,7 @@ class PlayState < GameState
     @player.move
     @player.collect_stars(@stars)
     @player.meteor_collide(@meteors)
-    $time += 1
+    $time += Gosu.milliseconds/1000 
 
     if rand(100) < 4 and @meteors.size < 5 then
       @meteors.push(Meteor.new)

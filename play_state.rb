@@ -18,9 +18,9 @@ class PlayState < GameState
 
     @star = Star.new
     @stars = Array.new
+    @start_time = Time.now.sec
 
     @font = Gosu::Font.new(20)
-    $time = Gosu.milliseconds/1000 
   end
 
   def update
@@ -37,10 +37,10 @@ class PlayState < GameState
       @player.deccelerate
     end
     
+    $start_time = Time.now.sec
     @player.move
     @player.collect_stars(@stars)
     @player.meteor_collide(@meteors)
-    $time += Gosu.milliseconds/1000 
 
     if rand(100) < 4 and @meteors.size < 5 then
       @meteors.push(Meteor.new)
@@ -50,7 +50,8 @@ class PlayState < GameState
       @stars.push(Star.new)
     end
 
-    if @player.score == 1000
+    if @player.score == 1000 
+      $end_time = Time.now.sec
       GameState.switch(CompleteState.instance)
     end
 
@@ -65,8 +66,7 @@ class PlayState < GameState
     @meteors.each { |meteor| meteor.draw }
     @stars.each { |star| star.draw }
     @font.draw( "Score: #{@player.score}", 10, 10, ZOrder::UI, 1.0, 1.0, 0xff_ffff00 )
-    @font.draw( "Lives: #{@player.life}", 300, 10, ZOrder::UI, 1.0, 1.0, 0xff_ffff00 )
-    @font.draw( "Time: #{$time}", 150, 10, ZOrder::UI, 1.0, 1.0, 0xff_ffff00 )
+    @font.draw( "Lives: #{@player.life}", 150, 10, ZOrder::UI, 1.0, 1.0, 0xff_ffff00 )
   end
 
   def button_down(id)

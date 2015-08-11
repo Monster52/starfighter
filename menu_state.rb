@@ -10,15 +10,15 @@ class MenuState < GameState
     @music = Gosu::Song.new('media/open_theme.wav')
   end
 
-  def enter
-    @music.play(true)
-    @music.volume = 1
-  end
-
-  def leave
-    @music.volume = 0
-    @music.stop
-  end
+# def enter
+#   @music.play(true)
+#   @music.volume = 1
+# end
+#
+# def leave
+#   @music.volume = 0
+#   @music.stop
+# end
 
   def update
     continue_text = @play_state ? "C = Continue, " : ""

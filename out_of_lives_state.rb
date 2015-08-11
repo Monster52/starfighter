@@ -12,19 +12,19 @@ class OutOfLivesState < GameState
       Gosu.default_font_name, 30)
   end
 
-  def enter
-    music.play(true)
-    music.volume = 1
-  end
-
-  def leave
-    music.volume = 0
-    music.stop
-  end
-
-  def music
-    @@music ||= Gosu::Song.new('media/Jingle_Lose_00.wav')
-  end
+# def enter
+#   music.play(true)
+#   music.volume = 1
+# end
+#
+# def leave
+#   music.volume = 0
+#   music.stop
+# end
+#
+# def music
+#   @@music ||= Gosu::Song.new('media/Jingle_Lose_00.wav')
+# end
 
   def draw
     @message.draw(

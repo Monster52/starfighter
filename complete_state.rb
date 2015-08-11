@@ -10,7 +10,7 @@ class CompleteState < GameState
       $window, "You Completed the Mission",
       Gosu.default_font_name, 80)
     @final_time = Gosu::Image.from_text(
-      $window, "Your final time was #{$time}",
+      $window, "Your final time was #{$end_time.to_i  - $start_time.to_i}",
       Gosu.default_font_name, 50)
     @info = Gosu::Image.from_text(
       $window, "Q = Quit, N = New Game",
@@ -18,8 +18,17 @@ class CompleteState < GameState
     @music = Gosu::Song.new("media/Jingle_Win_00.wav")
   end
 
+# def enter
+#   @music.play(true)
+#   @music.volume = 1
+# end
+#
+# def leave
+#   @music.volume = 0
+#   @music.stop
+# end
+#
   def draw
-    @music.play
     @message.draw(
       $window.width / 2 - @message.width / 2,
       $window.height / 2 - @message.height / 2,

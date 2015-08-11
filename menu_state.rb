@@ -7,22 +7,17 @@ class MenuState < GameState
     @message = Gosu::Image.from_text(
       $window, "Starchaser",
       Gosu.default_font_name, 100)
-    @music = Gosu::Song.new("media/open_theme.wav")
+    @music = Gosu::Song.new('media/open_theme.wav')
   end
 
   def enter
-    #music.play(true)
-    #music.volume = 1
+    @music.play(true)
+    @music.volume = 1
   end
 
   def leave
-    # music.volume = 0
-    # music.stop
-  end
-
-  def music
-    # @@music ||= Gosu::Song.new(
-    #   $window, Game.media_path('menu_music.mp3'))
+    @music.volume = 0
+    @music.stop
   end
 
   def update
@@ -33,7 +28,6 @@ class MenuState < GameState
   end
 
   def draw
-    @music.play
     @message.draw(
       $window.width / 2 - @message.width / 2,
       $window.height / 2 - @message.height / 2,
